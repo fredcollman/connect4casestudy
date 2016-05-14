@@ -3,21 +3,21 @@ import django.contrib.auth.views as auth_views
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404, get_list_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect, JsonResponse
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic.edit import CreateView
 from connect4 import models
-
+from connect4.forms import UserSignupForm
 
 # Create your views here.
 login = auth_views.login
 logout = auth_views.logout
 
 
-def signup(request):
-    """
-    write your user sign up view here
-    :param request:
-    :return:
-    """
-    pass
+signup = CreateView.as_view(
+    form_class=UserSignupForm,
+    template_name='registration/signup.html',
+    success_url=reverse_lazy('home'),
+)
 
 
 @login_required

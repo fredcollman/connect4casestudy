@@ -4,3 +4,12 @@
 h1 {
 	color: $primary-color;
 }
+
+.card-panel {
+	background: $primary-color;
+	color: white;
+
+	a {
+		color: $secondary-color;
+	}
+}
