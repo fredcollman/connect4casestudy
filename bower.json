@@ -1,0 +1,22 @@
+{
+  "name": "connect4",
+  "description": "This repo contains the source code for the Yobota case study exercise.",
+  "main": "index.js",
+  "authors": [
+    "Fred Collman"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Yobota/connect4casestudy",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "Materialize": "materialize#^0.97.6"
+  }
+}
