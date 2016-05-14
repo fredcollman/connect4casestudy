@@ -1,6 +1,10 @@
 {% extends 'layout.html' %}
 {% block content %}
 <h1>Games</h1>
+<form method="POST" action="{% url 'games' %}">
+	{% csrf_token %}
+	<button class="btn waves-effect waves-light right" type="submit">New game</button>
+</form>
 <h4>Your games</h4>
 <ul>
 {% for game in games %}
