@@ -62,6 +62,12 @@ class Game(models.Model):
     def is_viewable_by(self, user):
         return user in [self.player1, self.player2]
 
+    def colour_for(self, user):
+        if user == self.player1:
+            return 'red'
+        elif user == self.player2:
+            return 'yellow'
+
 @python_2_unicode_compatible
 class Coin(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)

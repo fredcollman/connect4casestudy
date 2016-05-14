@@ -1,5 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
-<h1>{{ game }}</h1>
+<h1>Let's play!</h1>
 <a class="btn waves-effect waves-light right" href="{% url 'games' %}">Back to games</a>
+<h4>{{ game }}</h4>
+You are: <strong>{{ colour }}</strong>
 {% endblock %}

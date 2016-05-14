@@ -48,3 +48,11 @@ class GameTest(TestCase):
     def test_player2_can_view(self):
         game = Game.objects.create(player1=self.alice, player2=self.bob)
         self.assertTrue(game.is_viewable_by(self.bob))
+
+    def test_player1_is_red(self):
+        game = Game.objects.create(player1=self.alice, player2=self.bob)
+        self.assertEqual('red', game.colour_for(self.alice))
+
+    def test_player2_is_yellow(self):        
+        game = Game.objects.create(player1=self.alice, player2=self.bob)
+        self.assertEqual('yellow', game.colour_for(self.bob))
