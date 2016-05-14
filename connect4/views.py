@@ -30,7 +30,10 @@ def games(request):
     if request.method == "POST":
         models.Game.objects.create(player1=request.user)
     games = models.Game.games_for_user(request.user)
-    return render(request, 'games.html', { 'games': games })
+    return render(request, 'games.html', { 
+        'games': games,
+        'available_games': models.Game.available_games(request.user),
+    })
 
 
 @login_required

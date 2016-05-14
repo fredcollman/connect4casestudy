@@ -55,6 +55,10 @@ class Game(models.Model):
         return cls.objects.filter(player1=user) | \
             cls.objects.filter(player2=user)
 
+    @classmethod
+    def available_games(cls, user):
+        return cls.objects.exclude(player1=user).filter(player2=None)
+
 @python_2_unicode_compatible
 class Coin(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)

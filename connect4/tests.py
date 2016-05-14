@@ -23,3 +23,16 @@ class GameTest(TestCase):
     def test_games_for_user_includes_player2(self):
         game = Game.objects.create(player1=self.alice, player2=self.bob)
         self.assertIn(game, Game.games_for_user(self.bob))
+
+    def test_games_can_be_available(self):
+        game = Game.objects.create(player1=self.alice)
+        self.assertIn(game, Game.available_games(self.bob))
+
+    def test_games_in_progress_are_not_available(self):
+        game = Game.objects.create(player1=self.alice, player2=self.bob)
+        charlie = self._create_user('charlie')
+        self.assertNotIn(game, Game.available_games(charlie))
+
+    def test_own_games_are_not_available(self):
+        game = Game.objects.create(player1=self.bob)
+        self.assertNotIn(game, Game.available_games(self.bob))
