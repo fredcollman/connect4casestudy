@@ -1,4 +1,22 @@
 {% extends 'layout.html' %}
 {% block content %}
-	<h1>Hello world</h1>
+	<h1>Log in</h1>
+	{% if form.errors %}
+		<div class="card-panel error">Invalid credentials, please try again.</div>
+	{% endif %}
+	<div class="row">
+		<form action="{% url 'login' %}" class="col s12">
+			{% csrf_token %}
+			<div class="input-field">
+				{{ form.username }}
+				<label for="username">User name</label>
+			</div>
+			<div class="input-field">
+				{{ form.password }}
+				<label for="password">Password</label>
+			</div>
+			<button class="btn waves-effect waves-light right" type="submit">Log in</button>
+			<input type="hidden" name="next" value="{{ next }}">
+		</form>
+	</div>
 {% endblock %}
