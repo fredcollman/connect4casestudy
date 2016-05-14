@@ -36,3 +36,15 @@ class GameTest(TestCase):
     def test_own_games_are_not_available(self):
         game = Game.objects.create(player1=self.bob)
         self.assertNotIn(game, Game.available_games(self.bob))
+
+    def test_can_view_own_games(self):
+        game = Game.objects.create(player1=self.bob)
+        self.assertTrue(game.is_viewable_by(self.bob))
+
+    def test_cannot_view_others_games(self):
+        game = Game.objects.create(player1=self.bob)
+        self.assertFalse(game.is_viewable_by(self.alice))
+
+    def test_player2_can_view(self):
+        game = Game.objects.create(player1=self.alice, player2=self.bob)
+        self.assertTrue(game.is_viewable_by(self.bob))

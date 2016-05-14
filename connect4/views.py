@@ -33,6 +33,7 @@ def games(request, game_id=None):
             game.join_up(request.user)
             return redirect('play', game.id)
         models.Game.objects.create(player1=request.user)
+        return redirect('games')
     games = models.Game.games_for_user(request.user)
     return render(request, 'games.html', {
         'games': games,
@@ -48,4 +49,7 @@ def play(request, game_id):
     :return:
     """
     game = models.Game.objects.get(pk=game_id)
-    return render(request, 'play.html', {'game': game})
+    if (game.is_viewable_by(request.user)):
+        return render(request, 'play.html', {'game': game})
+    else:
+        return redirect('games')

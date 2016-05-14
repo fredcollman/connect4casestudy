@@ -59,6 +59,9 @@ class Game(models.Model):
     def available_games(cls, user):
         return cls.objects.exclude(player1=user).filter(player2=None)
 
+    def is_viewable_by(self, user):
+        return user in [self.player1, self.player2]
+
 @python_2_unicode_compatible
 class Coin(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
