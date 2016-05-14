@@ -6,8 +6,24 @@
 	<button class="btn waves-effect waves-light right" type="submit">New game</button>
 </form>
 <h4>Your games</h4>
-<ul>
-{% for game in games %}
-<li>{{ game }}</li>
-{% endfor %}
+<table>
+	<thead>
+		<tr>
+			<th>Date Started</th>
+			<th>Red Player</th>
+			<th>Yellow Player</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for game in games %}
+		<tr>
+			<th>{{ game.created_date }}</th>
+			<th>{{ game.player1 }}</th>
+			<th>{{ game.player2 }}</th>
+			<th><a href="{% url 'play' game.id %}">View</a></th>
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>
 {% endblock %}

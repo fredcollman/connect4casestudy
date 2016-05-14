@@ -34,7 +34,7 @@ def games(request):
 
 
 @login_required
-def play(request):
+def play(request, game_id):
     """
     write your view which controls the gameplay interaction w the web layer here
     :param request:
