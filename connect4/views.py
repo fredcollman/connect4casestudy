@@ -27,7 +27,7 @@ def games(request):
     :param request:
     :return:
     """
-    pass
+    return render(request, 'games.html')
 
 
 @login_required
