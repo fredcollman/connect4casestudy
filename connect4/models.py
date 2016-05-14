@@ -50,6 +50,11 @@ class Game(models.Model):
 
         return True
 
+    @classmethod
+    def games_for_user(cls, user):
+        return cls.objects.filter(player1=user) | \
+            cls.objects.filter(player2=user)
+
 @python_2_unicode_compatible
 class Coin(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)

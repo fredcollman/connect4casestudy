@@ -27,7 +27,8 @@ def games(request):
     :param request:
     :return:
     """
-    return render(request, 'games.html')
+    games = models.Game.games_for_user(request.user)
+    return render(request, 'games.html', { 'games': games })
 
 
 @login_required

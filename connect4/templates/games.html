@@ -1,4 +1,9 @@
 {% extends 'layout.html' %}
 {% block content %}
 <h1>Games</h1>
+<h4>Your games</h4>
+<ul>
+{% for game in games %}
+<li>{{ game }}</li>
+{% endfor %}
 {% endblock %}
