@@ -178,3 +178,6 @@ dist/
 ### Sass ###
 .sass-cache/
 *.css.map
+
+### Do not check static files into VCS: use install script instead
+static/
