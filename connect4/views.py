@@ -40,4 +40,5 @@ def play(request, game_id):
     :param request:
     :return:
     """
-    pass
+    game = models.Game.objects.get(pk=game_id)
+    return render(request, 'play.html', { 'game': game })
