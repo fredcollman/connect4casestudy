@@ -5,7 +5,7 @@
 		<div class="card-panel error">Invalid credentials, please try again.</div>
 	{% endif %}
 	<div class="row">
-		<form action="{% url 'login' %}" class="col s12">
+		<form method="POST" action="{% url 'login' %}" class="col s12">
 			{% csrf_token %}
 			<div class="input-field">
 				{{ form.username }}
