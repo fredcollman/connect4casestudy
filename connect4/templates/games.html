@@ -41,9 +41,8 @@
 			<th>{{ game.created_date }}</th>
 			<th>{{ game.player1 }}</th>
 			<th>
-				<form method="POST" action="{% url 'games' %}">
+				<form method="POST" action="{% url 'games' game.id %}">
 					{% csrf_token %}
-					<input type="hidden" name="game_id" value="{{ game.id }}">
 					<button type="submit">Join</button>
 				</form>
 			</th>

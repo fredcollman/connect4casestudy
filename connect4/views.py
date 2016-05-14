@@ -21,16 +21,20 @@ signup = CreateView.as_view(
 
 
 @login_required
-def games(request):
+def games(request, game_id=None):
     """
     Write your view which controls the game set up and selection screen here
     :param request:
     :return:
     """
     if request.method == "POST":
+        if (game_id is not None):
+            game = models.Game.objects.get(pk=game_id)
+            game.join_up(request.user)
+            return redirect('play', game.id)
         models.Game.objects.create(player1=request.user)
     games = models.Game.games_for_user(request.user)
-    return render(request, 'games.html', { 
+    return render(request, 'games.html', {
         'games': games,
         'available_games': models.Game.available_games(request.user),
     })
@@ -44,4 +48,4 @@ def play(request, game_id):
     :return:
     """
     game = models.Game.objects.get(pk=game_id)
-    return render(request, 'play.html', { 'game': game })
+    return render(request, 'play.html', {'game': game})
