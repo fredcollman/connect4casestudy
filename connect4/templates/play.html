@@ -9,7 +9,18 @@ You are: <strong>{{ colour }}</strong>
 	{% for row in game.board.rows %}
 	<tr>
 		{% for cell in row %}
-			<td>{{ cell }}</td>
+			<td>
+			{% if cell %}
+				{{ cell }}
+			{% else %}
+				<form method="POST" action="{% url 'games' game.id %}">
+					{% csrf_token %}
+					<input type="hidden" name="column" value="{{ forloop.counter }}">
+					<input type="hidden" name="game_id" value="{{ game.id }}">
+					<button type="submit">place</button>
+				</form>
+			{% endif %}
+			</td>
 		{% endfor %}
 	</tr>
 	{% endfor %}
