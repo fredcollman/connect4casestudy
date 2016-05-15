@@ -19,14 +19,15 @@ class Board:
             raise ValueError('position already filled')
 
     def _set(self, coin):
-        self.coins[coin.row][coin.column] = coin.player
+        self.coins[coin.row][coin.column] = coin
 
     def _get(self, column, row):
         return self.coins[row][column]
 
     @staticmethod
     def is_winning_sequence(seq):
-        return _has_group_of_size_at_least(SIZE_TO_WIN, groupby(seq))
+        grouped_by_player = groupby(seq, lambda coin: coin.player)
+        return _has_group_of_size_at_least(SIZE_TO_WIN, grouped_by_player)
 
     def has_winner(self):
         return any(

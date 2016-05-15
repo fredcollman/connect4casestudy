@@ -8,10 +8,10 @@ You are: <strong>{{ colour }}</strong>
 <table>
 	{% for row in game.board.rows %}
 	<tr>
-		{% for cell in row %}
+		{% for coin in row %}
 			<td>
-			{% if cell %}
-				{{ cell }}
+			{% if coin %}
+				<a class="coin {{coin.colour}}">{{ coin.player }}</a>
 			{% else %}
 				<form method="POST" action="{% url 'games' game.id %}">
 					{% csrf_token %}

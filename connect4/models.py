@@ -108,4 +108,4 @@ class Coin(models.Model):
         return cls.objects.filter(game=game, column=column).count()
 
     def colour(self):
-        return self.game.colour_for(self.user)
+        return self.game.colour_for(self.player)
