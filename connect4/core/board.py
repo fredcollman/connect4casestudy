@@ -19,6 +19,7 @@ class Board:
             raise ValueError('position already filled')
 
     def _set(self, coin):
+        self.last_coin = coin
         self.coins[coin.row][coin.column] = coin
 
     def _get(self, column, row):
@@ -39,6 +40,13 @@ class Board:
         ) or any(
             self.is_winning_sequence(col) for col in self.columns()
         )
+
+    @property
+    def winner(self):
+        if self.has_winner():
+            return self.last_coin.player
+        else:
+            return None
 
     def rows(self):
         return reversed(self.coins)

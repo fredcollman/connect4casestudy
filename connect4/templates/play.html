@@ -5,6 +5,10 @@
 <h4>{{ game }}</h4>
 You are: <strong>{{ colour }}</strong>
 
+{% if game.board.winner %}
+<div class="card-panel">The winner is {{ game.board.winner }}</div>
+{% endif %}
+
 <table>
 	{% for row in game.board.rows %}
 	<tr>
