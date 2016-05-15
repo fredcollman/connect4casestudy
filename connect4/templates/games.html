@@ -40,7 +40,12 @@
 		<tr>
 			<th>{{ game.created_date }}</th>
 			<th>{{ game.player1 }}</th>
-			<th><a href="{% url 'games' game.id %}">Join</a></th>
+			<th>
+				<form method="POST" action="{% url 'games' game.id %}">
+					{% csrf_token %}
+					<button type="submit">join</button>
+				</form>
+			</th>
 		</tr>
 	{% endfor %}
 	</tbody>
