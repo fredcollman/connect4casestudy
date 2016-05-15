@@ -7,10 +7,19 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 </head>
 <body>
+	<nav>
+		<div class="nav-wrapper">
+			<a href="#" class="brand-logo">Connect4</a>
+      		<ul class="right">
+			{% if not user.is_anonymous %}
+				<li>Logged in as <strong>{{ user }}</strong></li>
+				<li><a class="amber-text" href="{% url 'logout' %}">Log out</a></li>
+			{% endif %}
+			</ul>
+		</div>
+	</nav>
 	<div class="container">
-	{% if not user.is_anonymous %}
-	<div class="card-panel">Logged in as {{ user }}. <a href="{% url 'logout' %}">Log out</a></div>
-	{% endif %}
+
 	{% block content %}{% endblock %}
 	</div>
 	<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
