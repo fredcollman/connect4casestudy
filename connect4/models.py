@@ -55,7 +55,8 @@ class Game(models.Model):
         return True
 
     def place_counter(self, player, column):
-        return self.make_move(player, Coin.number_in_column(column), column)
+        if self.is_turn_of(player):
+            return self.make_move(player, Coin.number_in_column(column), column)
 
     @classmethod
     def games_for_user(cls, user):
@@ -68,6 +69,11 @@ class Game(models.Model):
 
     def is_viewable_by(self, user):
         return user in [self.player1, self.player2]
+
+    def is_turn_of(self, user):
+        if not self.coin_set.exists():
+            return user == self.player1
+        return self.is_viewable_by(user) and self.last_move.player != user
 
     def colour_for(self, user):
         if user == self.player1:
@@ -99,3 +105,6 @@ class Coin(models.Model):
     @classmethod
     def number_in_column(cls, column):
         return cls.objects.filter(column=column).count()
+
+    def colour(self):
+        return self.game.colour_for(self.user)

@@ -56,3 +56,21 @@ class GameTest(TestCase):
     def test_player2_is_yellow(self):        
         game = Game.objects.create(player1=self.alice, player2=self.bob)
         self.assertEqual('yellow', game.colour_for(self.bob))
+
+    def test_player1_goes_first(self):
+        game = Game.objects.create(player1=self.alice, player2=self.bob)
+        self.assertTrue(game.is_turn_of(self.alice))
+
+    def test_player2_cannot_go_first(self):
+        game = Game.objects.create(player1=self.alice, player2=self.bob)
+        self.assertFalse(game.is_turn_of(self.bob))
+
+    def test_player2_goes_second(self):
+        game = Game.objects.create(player1=self.alice, player2=self.bob)
+        game.place_counter(self.alice, 0)
+        self.assertTrue(game.is_turn_of(self.bob))
+
+    def test_player1_cannot_go_second(self):
+        game = Game.objects.create(player1=self.alice, player2=self.bob)
+        game.place_counter(self.alice, 0)
+        self.assertFalse(game.is_turn_of(self.alice))
