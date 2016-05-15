@@ -56,7 +56,8 @@ class Game(models.Model):
 
     def place_counter(self, player, column):
         if self.is_turn_of(player):
-            return self.make_move(player, Coin.number_in_column(column), column)
+            return self.make_move(
+                player, Coin.number_in_column(self, column), column)
 
     @classmethod
     def games_for_user(cls, user):
@@ -103,8 +104,8 @@ class Coin(models.Model):
         ])
 
     @classmethod
-    def number_in_column(cls, column):
-        return cls.objects.filter(column=column).count()
+    def number_in_column(cls, game, column):
+        return cls.objects.filter(game=game, column=column).count()
 
     def colour(self):
         return self.game.colour_for(self.user)
