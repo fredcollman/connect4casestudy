@@ -26,8 +26,12 @@ class Board:
 
     @staticmethod
     def is_winning_sequence(seq):
-        grouped_by_player = groupby(seq, lambda coin: coin.player)
+        grouped_by_player = groupby(seq, Board._extract_player)
         return _has_group_of_size_at_least(SIZE_TO_WIN, grouped_by_player)
+
+    @staticmethod
+    def _extract_player(coin):
+        return coin.player if coin else None
 
     def has_winner(self):
         return any(

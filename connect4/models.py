@@ -74,6 +74,8 @@ class Game(models.Model):
     def is_turn_of(self, user):
         if not self.coin_set.exists():
             return user == self.player1
+        elif self.board.has_winner():
+            return False
         return self.is_viewable_by(user) and self.last_move.player != user
 
     def colour_for(self, user):
