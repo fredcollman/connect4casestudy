@@ -3,24 +3,27 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.db import models
+from connect4.core.board import Board
 
 # Create your models here.
 
+
 @python_2_unicode_compatible
 class Game(models.Model):
-    player1 = models.ForeignKey(User, on_delete=models.CASCADE, related_name='player_1')
-    player2 = models.ForeignKey(User, on_delete=models.CASCADE, related_name='player_2', blank=True, null=True)
+    player1 = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='player_1')
+    player2 = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='player_2', blank=True, null=True)
     status = models.CharField(max_length=10)
     winner = models.CharField(max_length=10)
     created_date = models.DateTimeField(default=timezone.now)
-
 
     def __str__(self):
         if self.player2:
             return ' vs '.join([self.player1.get_full_name(), self.player2.get_full_name()])
 
         else:
-            return 'Join now to play %s'%self.player1.get_short_name()
+            return 'Join now to play %s' % self.player1.get_short_name()
 
     @property
     def start_date(self):
@@ -44,9 +47,10 @@ class Game(models.Model):
 
     def make_move(self, player, row, column):
         try:
-             self.coin_set.create(game=self, player=player, row=row, column=column)
+            self.coin_set.create(game=self, player=player,
+                                 row=row, column=column)
         except:
-             return False
+            return False
 
         return True
 
@@ -67,6 +71,14 @@ class Game(models.Model):
             return 'red'
         elif user == self.player2:
             return 'yellow'
+
+    @property
+    def board(self):
+        board = Board()
+        for coin in self.coin_set.all():
+            board.add(coin)
+        return board
+
 
 @python_2_unicode_compatible
 class Coin(models.Model):

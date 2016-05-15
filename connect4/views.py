@@ -52,7 +52,7 @@ def play(request, game_id):
     if (game.is_viewable_by(request.user)):
         return render(request, 'play.html', {
             'game': game,
-            'colour': game.colour_for(request.user)
+            'colour': game.colour_for(request.user),
         })
     else:
         return redirect('games')
