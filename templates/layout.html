@@ -8,6 +8,9 @@
 </head>
 <body>
 	<div class="container">
+	{% if not user.is_anonymous %}
+	<div class="card-panel">Logged in as {{ user }}. <a href="{% url 'logout' %}">Log out</a></div>
+	{% endif %}
 	{% block content %}{% endblock %}
 	</div>
 	<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
