@@ -7,6 +7,8 @@ You are: <strong>{{ colour }}</strong>
 
 {% if game.board.winner %}
 <div class="card-panel">The winner is {{ game.board.winner }}</div>
+{% else %}
+<div class="card-panel">It's <strong>{{ game.whose_turn }}</strong>'s turn</div>
 {% endif %}
 
 <table>

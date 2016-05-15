@@ -56,6 +56,7 @@ def play(request, game_id):
         return render(request, 'play.html', {
             'game': game,
             'colour': game.colour_for(request.user),
+            'plays_next': game.whose_turn()
         })
     else:
         return redirect('games')
