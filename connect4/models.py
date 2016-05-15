@@ -54,6 +54,9 @@ class Game(models.Model):
 
         return True
 
+    def place_counter(self, player, column):
+        return self.make_move(player, Coin.number_in_column(column), column)
+
     @classmethod
     def games_for_user(cls, user):
         return cls.objects.filter(player1=user) | \
@@ -92,3 +95,7 @@ class Coin(models.Model):
         return ' '.join([
             self.player, 'to', self.row, self.column
         ])
+
+    @classmethod
+    def number_in_column(cls, column):
+        return cls.objects.filter(column=column).count()

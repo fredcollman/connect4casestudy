@@ -30,7 +30,10 @@ def games(request, game_id=None):
     if request.method == "POST":
         if (game_id is not None):
             game = models.Game.objects.get(pk=game_id)
-            game.join_up(request.user)
+            if request.POST['column'] is None:
+                game.join_up(request.user)
+            else:
+                game.place_counter(request.user, request.POST['column'])
             return redirect('play', game.id)
         models.Game.objects.create(player1=request.user)
         return redirect('games')
