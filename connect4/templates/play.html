@@ -11,7 +11,7 @@ You are: <strong>{{ colour }}</strong>
 		{% for coin in row %}
 			<td>
 			{% if coin %}
-				<a class="coin {{coin.colour}}">{{ coin.player }}</a>
+				<div class="coin {{coin.colour}}"></div>
 			{% else %}
 				<form method="POST" action="{% url 'games' game.id %}">
 					{% csrf_token %}

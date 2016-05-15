@@ -13,3 +13,18 @@ h1 {
 		color: $secondary-color;
 	}
 }
+
+.coin {
+	width: 30px;
+	height: 30px;
+	border: 30px solid;
+	border-radius: 30px;
+
+	&.yellow {
+		border-color: yellow;
+	}
+
+	&.red {
+		border-color: red;
+	}
+}
